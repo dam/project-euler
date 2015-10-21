@@ -1,0 +1,44 @@
+ruby: 
+(1..100).each do |i|
+  str = ''
+  str += 'Fizz' if i % 3 == 0
+  str += 'Buzz' if i % 5 == 0
+  puts (str.empty? ? i : str)
+end
+
+javascript:
+var fizzbuzz = function() {
+  var i, output;
+  for(i=1;i<101;i+=1) {
+    output = '';
+    if(i % 3 == 0) { output += 'Fizz'; }
+    if(i % 5 == 0) { output += 'Buzz'; }
+    console.log(output || i);
+  }
+}
+
+
+clojure:
+(defn fizzbuzz
+  []
+  (map 
+    #(cond (zero? (mod % 15)) "FizzBuzz"
+           (zero? (mod % 3)) "Fizz"
+           (zero? (mod % 5)) "Buzz"
+           :else %) 
+    (iterate inc 1)))
+
+(take 100 fizzbuzz)
+
+prolog:
+
+fizzbuzz(X) :- 0 is mod(X,15), write('FizzBuzz').
+fizzbuzz(X) :- 0 is mod(X,3), write('Fizz').
+fizzbuzz(X) :- 0 is mod(X,5), write('Buzz').
+fizzbuzz(X) :- write(X).
+
+runfizzbuzz :- foreach(between(1,100,X), (fizzbuzz(X),nl)).
+
+coffeescript:
+for i in [1..100]
+  console.log(['Fizz' if i % 3 is 0] + ['Buzz' if i % 5 is 0] or i)

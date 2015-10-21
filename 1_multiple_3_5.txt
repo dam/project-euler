@@ -1,0 +1,4 @@
+python:  sum([x for x in range(1000) if x % 3 == 0 or x % 5 == 0])                                             exec time: 0.36 ms 
+ruby:    (1...1000).inject(0) { |sum, i| sum + (i % 3 == 0 || i % 5 == 0 ? i : 0) }                            exec time: 0.215 ms
+prolog:  findall(X, (numlist(1,999,NL),member(X,NL),(0 =:= mod(X,3); 0 =:= mod(X,5))), L), sum_list(L,Res).    exec time: ?
+clojure: (apply + (for [x (range 1000) :when (or (= 0 (mod x 3)) (= 0 (mod x 5)))] x))                         exec time: 1.016 msecs
