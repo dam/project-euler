@@ -1,9 +1,6 @@
-// Usage: babel-node filename.js
-// ES6 syntax
-
 var original = limit => {
-  let list = Array.from(Array(limit).keys());
-  let multiple_filter = n => {
+  var list = Array.from(Array(limit).keys());
+  var multiple_filter = n => {
     return (n % 3 === 0) || (n % 5 === 0);	
   };
   return list.filter(multiple_filter).reduce((a,b) => a + b);

@@ -6,7 +6,7 @@ main([String]) ->
   	statistics(runtime),
   	Result = original(N),
   	{_, Time} = statistics(runtime),
-  	io:format("Result: ~w in ~p milliseconds~n", [Result, Time])
+  	io:format("Result: ~w in ~p microsecs~n", [Result, Time])
   catch
   	_:_ ->
   	  usage()
