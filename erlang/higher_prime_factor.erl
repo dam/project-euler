@@ -39,6 +39,19 @@ larger_prime_factor(N) when N > 0 ->
 larger_prime_factor(_N) ->
     exit("Please provide a positive integer").
 
+% Building more elegant solution based on manual solve
+primes_decomp(N) when is_integer(N), N > 0 ->
+    primes_decomp(N, [], 2).
+% Breaking recursion
+primes_decomp(N, Acc, I) when (I * I) > N -> [N|Acc];
+% recursion with +2, +3 iteration
+primes_decomp(N, Acc, I) when (N rem I) =:= 0 -> primes_decomp(N div I, [I|Acc], I); 
+primes_decomp(N, Acc, 2) -> primes_decomp(N, Acc, 3);
+primes_decomp(N, Acc, I) -> primes_decomp(N, Acc, I + 2). 
+
+fast_larger_prime_factor(N) ->
+    lists:nth(1, primes_decomp(N)).
+
 %% API
 test() ->
     io:format("Testing prime list generation~n"),
@@ -49,8 +62,13 @@ test() ->
     [2,3,5,7,11,13,17,19,23,29] = primes(30),
     io:format("Testing large prime factor example~n"),
     29 = larger_prime_factor(13195),
+    [29,13,7,5] = primes_decomp(13195),
+    29 = fast_larger_prime_factor(13195),
     ok.
 
 start() ->
     {Time, Result} = timer:tc( fun() -> larger_prime_factor(600851475143) end),
-    io:format("Result: ~w in ~p microsecs~n", [Result, Time]).
+    io:format("Result: ~w in ~p microsecs~n", [Result, Time]),
+    io:format("More elegant and faster answer~n"),
+    {Time1, Result1} = timer:tc( fun() -> fast_larger_prime_factor(600851475143) end),
+    io:format("Result: ~w in ~p microsecs~n", [Result1, Time1]).

@@ -40,7 +40,7 @@ let max_prime_factor = (value: number) => {
   return rest;
 }
 
-console.log('Procedural implementation');
+console.log('Generator implementation');
 start  = process.hrtime();
 result = max_prime_factor(600851475143); 
 diff   = process.hrtime(start);
